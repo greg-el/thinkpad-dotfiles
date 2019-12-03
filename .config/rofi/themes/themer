@@ -1,0 +1,48 @@
+#!/bin/bash
+
+unset hex0
+unset hex1
+unset hex2
+unset hex3
+unset hex4
+unset hex5
+unset hex6
+unset hex7
+unset hex8
+unset hex9
+
+source ~/.cache/wal/colors.sh
+
+declare -a hexarr=(${color0} ${color1} ${color2} ${color3} ${color4} ${color5} ${color6} ${color7} ${color8} ${color9} ${color10} ${color11} ${color12} ${color13} ${color14})
+
+COUNT=0
+for i in "${hexarr[@]}"; do
+        color=$i
+        hash='#'
+        alpha='D9'
+        hex=$(echo $color | cut -c2-7)
+        polybar=$hash$alpha$hex
+        varname='hex'
+        declare $varname$COUNT="$polybar"
+	    export $varname$COUNT="$polybar"
+        let COUNT=COUNT+1
+done  
+
+colors=(${hex0} ${hex1} ${hex2} ${hex3} ${hex4} ${hex5} ${hex6} ${hex7}
+         ${hex8} ${hex9})
+lines=(12 13 14 15 16 17 18 19 20 21 22)
+hashchar='#'
+semichar=';'
+path='/home/greg/.config/rofi/themes/'
+
+for i in ${!colors[*]}
+do
+    line=${lines[$i]}
+    trancolor=${colors[$i]}
+    color=$(echo $trancolor | cut -c4-9)
+    sed -i "${line}"'s/.*/    color'"${i}"':'"${hashchar}${color}${semichar}"'/' "$path"'theme_template.rasi' 
+done
+
+rm ${path}theme.rasi
+cp ${path}theme_template.rasi ${path}theme.rasi
+#sed 's/.*/    var: '$hashchar$color$semichar/ $path"theme_template.rasi" > $path"theme.rasi"

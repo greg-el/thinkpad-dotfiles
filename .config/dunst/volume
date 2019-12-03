@@ -1,0 +1,9 @@
+#!/bin/bash
+
+VOL=$(pactl list sinks | grep "Volume: front-left" | cut -d "/" -f2 | tr -d ' ' | tr -d '%')
+BARLENGTH=$((VOL/5))
+BAR=$( for a in `seq "$BARLENGTH"`; do echo -n ■; done)
+if [ -z "$BAR" ]; then
+    BAR="Muted"
+fi
+dunstify "Volume              " "$BAR$SPACE" -r 1 
