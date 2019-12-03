@@ -6,4 +6,4 @@ BAR=$( for a in `seq "$BARLENGTH"`; do echo -n ■; done)
 if [ -z "$BAR" ]; then
     BAR="Muted"
 fi
-dunstify "Volume              " "$BAR$SPACE" -r 1 
+dunstify "Volume                                " "$BAR" -r 1 
