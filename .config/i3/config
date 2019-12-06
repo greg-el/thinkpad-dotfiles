@@ -190,4 +190,4 @@ bindsym $mod+m exec ssh pi "python3 ~/scripts/light-toggle.py --on main"
 bindsym $mod+n exec ssh pi "python3 ~/scripts/light-toggle.py --on sec"
 bindsym $mod+p exec ssh pi "python3 ~/scripts/light-toggle.py --off main"
 bindsym $mod+o exec ssh pi "python3 ~/scripts/light-toggle.py --off sec"
-bindsym $mod+b exec dunstify $(cat /sys/class/power_supply/BAT0/capacity) 
+bindsym $mod+b exec dunstify Battery "$(cat /sys/class/power_supply/BAT0/capacity)%"
